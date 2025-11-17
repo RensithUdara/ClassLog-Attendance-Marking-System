@@ -1,0 +1,72 @@
+
+
+/* Section Styles */
+#manageUserSection {
+    display: none; /* Initially hidden */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+/* Heading Styles */
+#manageUserSection h3 {
+    margin-top: 0;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Select Box Styles */
+#manageUserSection select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+#proceedBtn {
+    display: none; /* Initially hidden */
+    background: #00bcd4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#proceedBtn:hover {
+    background: #005cd4;
+}
+
+/* Additional Styles for Elements to be Displayed Later */
+#batchSelectDiv, #batchSelect {
+    display: none; /* Initially hidden */
+}
+
+#batchSelectDiv h3 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+/* Display Elements */
+#manageUserSection.show {
+    display: block;
+}
+
+#batchSelectDiv.show, #proceedBtn.show {
+    display: block;
+}
