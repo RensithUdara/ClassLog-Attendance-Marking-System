@@ -1,0 +1,82 @@
+
+.container100 {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+.form-slide {
+    display: none;
+}
+
+#form-container100 .form-slide {
+    animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.button100 {
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #007bff;
+    border: none;
+    transition: transform 0.3s;
+    line-height: default;
+    font-weight: default;
+    border-radius: none;
+    width: 65%;
+    height: default;
+    color: default;
+    
+}
+
+.button100:hover {
+    transform: scale(1.1);
+    box-shadow: 5px;
+}
+
+.button100[id="generate-report"]{
+    box-shadow:  0 0 5px cyan,
+                0 0 25px cyan;
+}
+
+.button100[id="generate-report"]:hover{
+    box-shadow: 0 0 5px cyan,
+                0 0 25px cyan,
+                0 0 50px cyan,
+                0 0  200px cyan;
+
+}
+
+.form-slide {
+    display: none;
+}
+
+#form-container {
+    margin-top: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+input:focus, select:focus {
+        outline: none;
+    }
+                         
