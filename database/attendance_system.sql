@@ -624,7 +624,8 @@ INSERT INTO `subjects` (`subject_id`, `subject_code`, `subject_name`, `total_lec
 (8, 'IC 2201', 'Database Management Systems II\r\n\r\n', 13, 'ic_2201_attendance'),
 (9, 'IC 2202', 'Discrete Mathematics\r\n\r\n', 14, 'ic_2202_attendance'),
 (10, 'IC 2203', 'IT project Management\r\n\r\n', 14, 'ic_2203_attendance'),
-(11, 'sub_Event', 'Event', 0, 'events_attendance');
+(11, 'sub_Event', 'Event', 0, 'events_attendance'),
+(12, 'NS 1001', 'New Subject - Introduction to Technology', 15, 'new_subject_attendance');
 
 --
 -- Indexes for dumped tables
@@ -941,6 +942,64 @@ ALTER TABLE `subjects`
   MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
+-- Table structure for table `new_subject_attendance`
+--
+
+CREATE TABLE `new_subject_attendance` (
+  `attendance_id` int(11) NOT NULL AUTO_INCREMENT,
+  `scanned_Date` date NOT NULL,
+  `scanned_Time` time NOT NULL,
+  `Subject_id` int(11) NOT NULL,
+  `Subject_Code` varchar(20) NOT NULL DEFAULT 'NS 1001',
+  `student_id` char(10) NOT NULL,
+  `batch_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  PRIMARY KEY (`attendance_id`),
+  KEY `Subject_id` (`Subject_id`),
+  KEY `batch_id` (`batch_id`),
+  KEY `department_id` (`department_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `new_subject_attendance`
+--
+
+INSERT INTO `new_subject_attendance` (`attendance_id`, `scanned_Date`, `scanned_Time`, `Subject_id`, `Subject_Code`, `student_id`, `batch_id`, `department_id`) VALUES
+(1, '2025-01-15', '10:30:00', 11, 'NS 1001', '2022t01101', 4, 1),
+(2, '2025-01-15', '10:32:00', 11, 'NS 1001', '2022t01105', 4, 1),
+(3, '2025-01-17', '10:30:00', 11, 'NS 1001', '2022t01110', 4, 1);
+
+--
+-- Table structure for table `parent_guardian`
+--
+
+CREATE TABLE `parent_guardian` (
+  `parent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `student_id` char(10) NOT NULL,
+  `relationship` enum('Father','Mother','Guardian','Other') NOT NULL DEFAULT 'Father',
+  `password` varchar(150) NOT NULL,
+  `reset_token_hash` varchar(64) DEFAULT NULL,
+  `reset_token_expires_at` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`parent_id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `reset_token_hash` (`reset_token_hash`),
+  KEY `student_id` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `parent_guardian`
+--
+
+INSERT INTO `parent_guardian` (`parent_id`, `name`, `email`, `phone`, `student_id`, `relationship`, `password`, `reset_token_hash`, `reset_token_expires_at`, `created_at`) VALUES
+(1, 'John Johnson', 'john.johnson.parent@gmail.com', '+1-555-0101', '2019t01101', 'Father', '$2y$10$encrypted_parent_password1', NULL, NULL, '2025-01-01 08:00:00'),
+(2, 'Mary Williams', 'mary.williams.parent@gmail.com', '+1-555-0102', '2019t01105', 'Mother', '$2y$10$encrypted_parent_password2', NULL, NULL, '2025-01-01 08:00:00'),
+(3, 'Robert Brown', 'robert.brown.parent@gmail.com', '+1-555-0103', '2019t01110', 'Father', '$2y$10$encrypted_parent_password3', NULL, NULL, '2025-01-01 08:00:00');
+
+--
 -- Constraints for dumped tables
 --
 
@@ -1065,6 +1124,26 @@ ALTER TABLE `ic_2203_attendance`
   ADD CONSTRAINT `ic_2203_attendance_ibfk_1` FOREIGN KEY (`Subject_id`) REFERENCES `subjects` (`subject_id`),
   ADD CONSTRAINT `ic_2203_attendance_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
   ADD CONSTRAINT `ic_2203_attendance_ibfk_3` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`);
+
+--
+-- Constraints for table `new_subject_attendance`
+--
+ALTER TABLE `new_subject_attendance`
+  ADD CONSTRAINT `new_subject_attendance_ibfk_1` FOREIGN KEY (`Subject_id`) REFERENCES `subjects` (`subject_id`),
+  ADD CONSTRAINT `new_subject_attendance_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
+  ADD CONSTRAINT `new_subject_attendance_ibfk_3` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`);
+
+--
+-- AUTO_INCREMENT for table `new_subject_attendance`
+--
+ALTER TABLE `new_subject_attendance`
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `parent_guardian`
+--
+ALTER TABLE `parent_guardian`
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
